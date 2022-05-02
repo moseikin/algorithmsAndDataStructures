@@ -32,24 +32,22 @@ public class FastSort {
         if (integers.size() < 2) {
             return integers;
         } else {
-            int supportElement = integers.get(integers.size() / 2);
-            List<Integer> greaterValueUnsortedList = new ArrayList<>();
-            List<Integer> lesserValueUnsortedList = new ArrayList<>();
+            int centralSupportElement = integers.get(integers.size() / 2);
+            List<Integer> unsortedGreaterValues = new ArrayList<>();
+            List<Integer> unsortedLesserValues = new ArrayList<>();
 
             for (Integer integer : integers) {
-                if (integer < supportElement) {
-                    lesserValueUnsortedList.add(integer);
-                } else if (integer > supportElement) {
-                    greaterValueUnsortedList.add(integer);
+                if (integer < centralSupportElement) {
+                    unsortedLesserValues.add(integer);
+                } else if (integer > centralSupportElement) {
+                    unsortedGreaterValues.add(integer);
                 }
             }
-            List<Integer> lesserValuesSortedList = fastSort(lesserValueUnsortedList);
-            List<Integer> greaterValuesSortedList = fastSort(greaterValueUnsortedList);
 
             List<Integer> sorted = new ArrayList<>();
-            sorted.addAll(lesserValuesSortedList);
-            sorted.add(supportElement);
-            sorted.addAll(greaterValuesSortedList);
+            sorted.addAll(fastSort(unsortedLesserValues));
+            sorted.add(centralSupportElement);
+            sorted.addAll(fastSort(unsortedGreaterValues));
             return sorted;
         }
     }

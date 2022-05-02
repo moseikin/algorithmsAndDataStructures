@@ -1,6 +1,9 @@
 package search;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Алгоритм бинарного поиска работает только в отсортированных списках.
@@ -8,11 +11,11 @@ import java.util.*;
  * 1.1 Если искомое число больше числа в середине списка, то первая часть списка отбрасывается.
  * 1.2 Если искомое число меньше числа в середине списка, то отбрасывается вторая часть.
  * 2. Повторяется п.1 до тех пор, пока ответ не будет найден.
- *
+ * <p>
  * Таким образом, при каждой итерации пространство для поиска уменьшается в два раза.
  * Скорость работы алгоритма будет равна O(log n):
  * Список длиной 100 миллионов элементов будет обработан максимум за 27 итераций (~2^27)
- *
+ * <p>
  * Тогда как поиск простым перебором работает со скоростью O(n).
  * То есть, количество итераций будет зависеть от позиции искомого числа в списке.
  * В частном случае, когда число будет находиться в начале списка, простой поиск сработает быстрее, за O(1)
@@ -20,8 +23,8 @@ import java.util.*;
 
 public class BinarySearch {
     private static final int RANGE = 100_000_000;
-    private static int searchInt;
     private static final Random random = new Random();
+    private static int searchInt;
     private static int binarySearchIterations;
     private static int simpleSearchIterations;
 
@@ -50,7 +53,7 @@ public class BinarySearch {
         return integers;
     }
 
-    private static void startBinarySearch(List<Integer> integers){
+    private static void startBinarySearch(List<Integer> integers) {
         long startMillis = new Date().getTime();
         binarySearch(integers);
         long binarySearchMillis = new Date().getTime() - startMillis;

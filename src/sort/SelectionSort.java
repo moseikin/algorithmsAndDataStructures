@@ -1,6 +1,8 @@
 package sort;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Сортировка выбором осуществляется за счет итерации по несортированному списку и выбора из него наименьшего значения.
@@ -10,39 +12,14 @@ import java.util.*;
  * Сложность алгоритма равняется O(n^2)
  */
 public class SelectionSort {
-    private static boolean ellipsisPrinted = false;
+    private static final Util util = new Util();
 
     public static void main(String[] args) {
-        List<Integer> integers = initList();
+        List<Integer> integers = util.initList();
 
-        ellipsisPrinted = false;
+        util.setEllipsisPrinted(false);
 
         selectionSort(integers);
-    }
-
-    private static List<Integer> initList() {
-        Random random = new Random();
-        List<Integer> integers = new ArrayList<>();
-        int listSize = 100_000;
-
-        for (int i = 0; i < listSize; i++) {
-            int randomInt = random.nextInt(1_000_000);
-            integers.add(randomInt);
-            printItem(i, listSize, randomInt);
-        }
-        System.out.println();
-        return integers;
-    }
-
-    private static void printItem(int iteration, int listSize, int value) {
-        if (iteration < 3 || iteration > listSize - 4) {
-            System.out.printf(Locale.ITALY, "%,d   ", value);
-        } else {
-            if (!ellipsisPrinted) {
-                System.out.print("... ");
-                ellipsisPrinted = true;
-            }
-        }
     }
 
     private static void selectionSort(List<Integer> integers) {
@@ -63,15 +40,11 @@ public class SelectionSort {
             integers.remove(index);
             sortedIntegers.add(smallestInt);
 
-            printItem(iteration, listSize, smallestInt);
+            util.printItem(iteration, listSize, smallestInt);
 
             iteration++;
         }
-        printTotalTime(startMillis);
+        util.printTotalTimeSeconds(startMillis);
     }
 
-    private static void printTotalTime(long startMillis) {
-        long sortingSeconds = (new Date().getTime() - startMillis) / 1000;
-        System.out.printf("%n Сортировка заняла %d секунд", sortingSeconds);
-    }
 }

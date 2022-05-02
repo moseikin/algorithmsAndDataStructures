@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Util {
 
-    private boolean ellipsisPrinted = false;
     private final int showDigitsFromStart = 9;
     private final int showDigitsFromEnd = 9;
+    private boolean ellipsisPrinted = false;
 
     public List<Integer> initList() {
         Random random = new Random();
